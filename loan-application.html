@@ -3,131 +3,60 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Branch-style Loan Application</title>
+<title>Loan Application</title>
 <style>
-  body {
-    font-family: Arial, sans-serif;
-    background-color: #f3f4f6;
-    margin: 0;
-    padding: 0;
-    color: #111827;
-  }
-  .container {
-    max-width: 650px;
-    margin: 2rem auto;
-    padding: 2.5rem;
-    background: white;
-    border-radius: 12px;
-    box-shadow: 0 6px 12px rgba(0,0,0,0.1);
-  }
-  h2 {
-    text-align: center;
-    color: #007aff;
-    margin-bottom: 2rem;
-  }
-  form {
-    display: flex;
-    flex-direction: column;
-  }
-  .form-step {
-    display: none;
-    flex-direction: column;
-    gap: 1rem;
-  }
-  .form-step.active {
-    display: flex;
-  }
-  label {
-    font-weight: bold;
-  }
-  input, select, textarea {
-    padding: 0.75rem;
-    border-radius: 8px;
-    border: 1px solid #d1d5db;
-    font-size: 1rem;
-    width: 100%;
-  }
-  input[type="file"] {
-    padding: 0.25rem;
-  }
-  input:focus, select:focus, textarea:focus {
-    outline: none;
-    border-color: #007aff;
-    box-shadow: 0 0 5px rgba(0,122,255,0.3);
-  }
-  .buttons {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 1rem;
-  }
-  button {
-    padding: 0.75rem 1.5rem;
-    background-color: #007aff;
-    color: white;
-    font-weight: bold;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: 0.3s;
-  }
-  button:hover {
-    background-color: #005bbb;
-  }
-  .section-title {
-    color: #007aff;
-    font-size: 1.25rem;
-    font-weight: bold;
-    border-bottom: 2px solid #007aff;
-    padding-bottom: 0.25rem;
-    margin-top: 1rem;
-  }
-  .referee-group {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    background: #f9fafb;
-    padding: 1rem;
-    border-radius: 8px;
-    border: 1px solid #e5e7eb;
-  }
-  .referee-group h4 {
-    margin: 0;
-    font-size: 1rem;
-    color: #1e3a8a;
-  }
-  .file-preview {
-    font-size: 0.9rem;
-    color: #555;
-  }
+  body { font-family: Arial, sans-serif; background:#f3f4f6; margin:0; color:#111827; }
+  .container { max-width: 650px; margin:2rem auto; padding:2.5rem; background:white; border-radius:12px; box-shadow:0 6px 12px rgba(0,0,0,0.1);}
+  h2 { text-align:center; color:#007aff; margin-bottom:2rem; }
+  .progress-bar { display:flex; margin-bottom:1rem; }
+  .progress-step { flex:1; height:6px; margin-right:4px; background:#d1d5db; border-radius:3px; }
+  .progress-step.active { background:#007aff; }
+  form { display:flex; flex-direction:column; }
+  .form-step { display:none; flex-direction:column; gap:1rem; }
+  .form-step.active { display:flex; }
+  label { font-weight:bold; }
+  input, select, textarea { padding:0.75rem; border-radius:8px; border:1px solid #d1d5db; font-size:1rem; width:100%; }
+  input:focus, select:focus, textarea:focus { outline:none; border-color:#007aff; box-shadow:0 0 5px rgba(0,122,255,0.3);}
+  .buttons { display:flex; justify-content:space-between; margin-top:1rem; }
+  button { padding:0.75rem 1.5rem; background:#007aff; color:white; font-weight:bold; border:none; border-radius:8px; cursor:pointer; transition:0.3s; }
+  button:hover { background:#005bbb; }
+  .section-title { color:#007aff; font-size:1.25rem; font-weight:bold; border-bottom:2px solid #007aff; padding-bottom:0.25rem; margin-top:1rem; }
+  .referee-group { display:flex; flex-direction:column; gap:0.5rem; background:#f9fafb; padding:1rem; border-radius:8px; border:1px solid #e5e7eb; }
+  .referee-group h4 { margin:0; font-size:1rem; color:#1e3a8a; }
+  video { width:100%; border-radius:12px; border:1px solid #d1d5db; }
+  .capture-preview { width:200px; margin-top:10px; border-radius:8px; }
+  .file-preview { font-size:0.9rem; color:#555; margin-top:5px; }
 </style>
 </head>
 <body>
 
 <div class="container">
   <h2>Loan Application Form</h2>
-  <form id="loanForm" enctype="multipart/form-data">
 
+  <div class="progress-bar">
+    <div class="progress-step active"></div>
+    <div class="progress-step"></div>
+    <div class="progress-step"></div>
+    <div class="progress-step"></div>
+    <div class="progress-step"></div>
+  </div>
+
+  <form id="loanForm">
     <!-- Step 1: Personal Details -->
     <div class="form-step active">
       <div class="section-title">Personal Details</div>
       <label for="fullName">Full Name</label>
       <input type="text" id="fullName" required>
-
       <label for="idNumber">National ID / Passport Number</label>
       <input type="text" id="idNumber" required>
-
       <label for="dob">Date of Birth</label>
       <input type="date" id="dob" required>
-
       <label for="phone">Phone Number</label>
       <input type="tel" id="phone" placeholder="+254..." required>
-
       <label for="email">Email Address</label>
       <input type="email" id="email" required>
-
       <label for="residence">Place of Residence</label>
       <input type="text" id="residence" required>
-
       <label for="maritalStatus">Marital Status</label>
       <select id="maritalStatus" required>
         <option value="">Select</option>
@@ -149,19 +78,14 @@
         <option value="Business Owner">Business Owner</option>
         <option value="Other">Other</option>
       </select>
-
       <label for="employer">Employer / Business Name</label>
       <input type="text" id="employer" required>
-
       <label for="jobTitle">Job / Position Title</label>
       <input type="text" id="jobTitle" required>
-
       <label for="jobLocation">Job / Business Location</label>
       <input type="text" id="jobLocation" required>
-
       <label for="yearsEmployed">Years of Employment / Business Operation</label>
       <input type="number" id="yearsEmployed" min="0" required>
-
       <label for="monthlyIncome">Monthly Income (Ksh)</label>
       <input type="number" id="monthlyIncome" min="1" required>
     </div>
@@ -171,7 +95,6 @@
       <div class="section-title">Loan Details</div>
       <label for="amount">Loan Amount (Ksh)</label>
       <input type="number" id="amount" min="1" required>
-
       <label for="term">Repayment Term (Months)</label>
       <select id="term" required>
         <option value="">Select Term</option>
@@ -180,17 +103,14 @@
         <option value="6">6 Months</option>
         <option value="12">12 Months</option>
       </select>
-
       <label for="purpose">Loan Purpose</label>
       <textarea id="purpose" rows="3" required></textarea>
-
       <div id="loanPreview" class="file-preview"></div>
     </div>
 
     <!-- Step 4: Referees -->
     <div class="form-step">
       <div class="section-title">Referees / Emergency Contacts</div>
-
       <div class="referee-group">
         <h4>Referee 1</h4>
         <input type="text" id="referee1Name" placeholder="Full Name" required>
@@ -199,7 +119,6 @@
         <input type="text" id="referee1Occupation" placeholder="Occupation" required>
         <input type="text" id="referee1Location" placeholder="Location" required>
       </div>
-
       <div class="referee-group">
         <h4>Referee 2</h4>
         <input type="text" id="referee2Name" placeholder="Full Name" required>
@@ -210,15 +129,16 @@
       </div>
     </div>
 
-    <!-- Step 5: Verification -->
+    <!-- Step 5: Camera Verification -->
     <div class="form-step">
-      <div class="section-title">Verification</div>
-      <label for="idUpload">Upload National ID / Passport (Front & Back)</label>
-      <input type="file" id="idUpload" accept="image/*,application/pdf" required>
-      <label for="selfieUpload">Upload Selfie / Face Photo</label>
-      <input type="file" id="selfieUpload" accept="image/*" required>
-      <label for="mpesaUpload">Upload MPESA Last 6 Months Statement</label>
-      <input type="file" id="mpesaUpload" accept="image/*,application/pdf" required>
+      <div class="section-title">Verification (Camera)</div>
+      <div id="cameraStepContainer">
+        <p id="cameraInstruction">Take a photo of your ID (Front)</p>
+        <video id="camera" autoplay playsinline></video>
+        <button type="button" id="captureBtn">Take Photo</button>
+        <img id="preview" class="capture-preview" style="display:none;">
+        <button type="button" id="retakeBtn" style="display:none;">Retake</button>
+      </div>
     </div>
 
     <!-- Navigation Buttons -->
@@ -238,13 +158,16 @@ const nextBtn = document.getElementById("nextBtn");
 const loanAmount = document.getElementById("amount");
 const loanTerm = document.getElementById("term");
 const loanPreview = document.getElementById("loanPreview");
+const progressSteps = document.querySelectorAll(".progress-step");
 
 function showStep(n) {
   steps.forEach((step, i) => step.classList.toggle("active", i === n));
   prevBtn.style.display = n === 0 ? "none" : "inline-block";
   nextBtn.textContent = n === steps.length - 1 ? "Submit" : "Next";
+  progressSteps.forEach((bar, i) => bar.classList.toggle("active", i <= n));
 
   if (n === 2) updateLoanPreview();
+  if (n === 4) startCameraCapture();
 }
 
 function nextPrev(n) {
@@ -268,13 +191,27 @@ function validateForm() {
       return false;
     }
   }
+  // Extra validation for camera step
+  if (currentStep === 4 && !capturedImages.every(img => img)) {
+    alert("Please capture all required photos before proceeding.");
+    return false;
+  }
+  // Referee uniqueness
+  if (currentStep === 3) {
+    if (
+      document.getElementById("referee1Phone").value === document.getElementById("referee2Phone").value
+    ) {
+      alert("Referee phone numbers cannot be the same.");
+      return false;
+    }
+  }
   return true;
 }
 
 function updateLoanPreview() {
   const amount = parseFloat(loanAmount.value) || 0;
   const term = parseInt(loanTerm.value) || 0;
-  const interestRate = 10; // 10% flat for demo
+  const interestRate = 10;
   if (amount && term) {
     const interest = (amount * interestRate) / 100;
     const total = amount + interest;
@@ -285,12 +222,69 @@ function updateLoanPreview() {
   }
 }
 
-prevBtn.addEventListener("click", () => nextPrev(-1));
+// Camera capture logic
+const video = document.getElementById("camera");
+const captureBtn = document.getElementById("captureBtn");
+const preview = document.getElementById("preview");
+const retakeBtn = document.getElementById("retakeBtn");
+const cameraInstruction = document.getElementById("cameraInstruction");
+let captureIndex = 0;
+const cameraSteps = ["ID Front", "ID Back", "Selfie"];
+let capturedImages = [null, null, null]; // store images for 3 captures
+
+function startCameraCapture() {
+  navigator.mediaDevices.getUserMedia({ video: { facingMode: captureIndex===2?"user":"environment" } })
+    .then(stream => video.srcObject = stream)
+    .catch(err => alert("Camera access required"));
+  updateInstruction();
+}
+
+function updateInstruction() {
+  cameraInstruction.textContent = `Take a photo of your ${cameraSteps[captureIndex]}`;
+  preview.style.display = "none";
+  video.style.display = "block";
+  captureBtn.style.display = "inline-block";
+  retakeBtn.style.display = "none";
+}
+
+function isBlurry(canvas) {
+  const context = canvas.getContext("2d");
+  const imgData = context.getImageData(0, 0, canvas.width, canvas.height);
+  let sum = 0;
+  for (let i=0;i<imgData.data.length;i+=4){
+    const brightness=(imgData.data[i]+imgData.data[i+1]+imgData.data[i+2])/3;
+    sum+=brightness;
+  }
+  const variance=sum/imgData.data.length;
+  return variance<50; // threshold, can adjust
+}
+
+captureBtn.addEventListener("click", () => {
+  const canvas = document.createElement("canvas");
+  canvas.width = video.videoWidth;
+  canvas.height = video.videoHeight;
+  canvas.getContext("2d").drawImage(video, 0, 0);
+  if(isBlurry(canvas)){
+    alert("Photo is blurry. Please retake.");
+    return;
+  }
+  const dataURL = canvas.toDataURL("image/png");
+  preview.src = dataURL;
+  preview.style.display = "block";
+  video.style.display = "none";
+  captureBtn.style.display = "none";
+  retakeBtn.style.display = "inline-block";
+  capturedImages[captureIndex] = dataURL;
+});
+
+retakeBtn.addEventListener("click", () => updateInstruction());
+
 nextBtn.addEventListener("click", () => nextPrev(1));
+prevBtn.addEventListener("click", () => nextPrev(-1));
 loanAmount.addEventListener("input", updateLoanPreview);
 loanTerm.addEventListener("change", updateLoanPreview);
 
 showStep(currentStep);
 </script>
 </body>
-          </html>
+  </html>

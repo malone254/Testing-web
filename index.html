@@ -3,8 +3,126 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>LendEasy - Home</title>
+  <title>LendEasy - Lending Platform</title>
   <link rel="stylesheet" href="styles/style.css">
+  <style>
+    /* General */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      line-height: 1.6;
+      background-color: #f9fafb;
+      color: #111827;
+    }
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* Navbar */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      background-color: #1e3a8a;
+      color: white;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .navbar .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 1.5rem;
+    }
+    .nav-links a {
+      color: white;
+      font-weight: 500;
+    }
+    .nav-links a:hover {
+      text-decoration: underline;
+    }
+
+    /* Hero */
+    .hero {
+      text-align: center;
+      padding: 5rem 1rem;
+      background: linear-gradient(to right, #3b82f6, #60a5fa);
+      color: white;
+    }
+    .hero h1 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+    .hero p {
+      font-size: 1.25rem;
+      margin-bottom: 2rem;
+    }
+    .hero .btn {
+      display: inline-block;
+      padding: 0.75rem 2rem;
+      background-color: #1e40af;
+      color: white;
+      border-radius: 8px;
+      font-weight: bold;
+    }
+    .hero .btn:hover {
+      background-color: #1e3a8a;
+    }
+
+    /* Features */
+    .features {
+      padding: 4rem 2rem;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 2rem;
+      text-align: center;
+    }
+    .feature-card {
+      background-color: white;
+      border-radius: 8px;
+      padding: 2rem;
+      width: 250px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      transition: transform 0.2s;
+    }
+    .feature-card:hover {
+      transform: translateY(-5px);
+    }
+    .feature-card h3 {
+      margin-bottom: 1rem;
+      color: #1e3a8a;
+    }
+
+    /* Footer */
+    footer {
+      background-color: #1e3a8a;
+      color: white;
+      text-align: center;
+      padding: 2rem 1rem;
+      margin-top: 3rem;
+    }
+    footer a {
+      color: #fbbf24;
+    }
+
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 2rem;
+      }
+      .features {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+  </style>
 </head>
 <body>
 
@@ -15,17 +133,41 @@
       <li><a href="index.html">Home</a></li>
       <li><a href="borrower.html">Borrower</a></li>
       <li><a href="lender.html">Lender</a></li>
-      <li><a href="#">Login</a></li>
+      <li><a href="loan-application.html">Apply Loan</a></li>
     </ul>
   </nav>
 
   <!-- Hero Section -->
   <section class="hero">
     <h1>Welcome to LendEasy</h1>
-    <p>Borrow or lend money easily and securely.</p>
-    <a href="loan-application.html" class="btn">Apply for Loan</a>
+    <p>Borrow or lend money safely and easily with our trusted platform.</p>
+    <a href="loan-application.html" class="btn">Get Started</a>
   </section>
 
-  <script src="scripts/main.js"></script>
+  <!-- Features Section -->
+  <section class="features">
+    <div class="feature-card">
+      <h3>Fast Loans</h3>
+      <p>Get your loan approved quickly with minimal paperwork.</p>
+    </div>
+    <div class="feature-card">
+      <h3>Secure Platform</h3>
+      <p>Your personal and financial data are fully protected with us.</p>
+    </div>
+    <div class="feature-card">
+      <h3>Flexible Repayments</h3>
+      <p>Choose repayment schedules that fit your budget comfortably.</p>
+    </div>
+    <div class="feature-card">
+      <h3>Peer-to-Peer Lending</h3>
+      <p>Invest in loans and earn interest while helping others.</p>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2026 LendEasy. All Rights Reserved. | <a href="#">Privacy Policy</a></p>
+  </footer>
+
 </body>
 </html>

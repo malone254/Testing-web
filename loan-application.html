@@ -6,45 +6,78 @@
   <title>Loan Application - LendEasy</title>
   <link rel="stylesheet" href="styles/style.css">
   <style>
-    .application {
-      max-width: 500px;
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f3f4f6;
+      margin: 0;
+      padding: 0;
+      color: #111827;
+    }
+
+    .application-container {
+      max-width: 600px;
       margin: 3rem auto;
       padding: 2rem;
       background-color: white;
-      border-radius: 8px;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      border-radius: 12px;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.1);
     }
-    .application h2 {
+
+    .application-container h2 {
       text-align: center;
       color: #1e3a8a;
-      margin-bottom: 1.5rem;
+      margin-bottom: 2rem;
+      font-size: 2rem;
     }
-    .application label {
-      display: block;
-      margin-bottom: 0.5rem;
+
+    .application-container form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    label {
       font-weight: bold;
+      margin-bottom: 0.25rem;
     }
-    .application input, 
-    .application select, 
-    .application textarea {
-      width: 100%;
-      padding: 0.5rem;
-      margin-bottom: 1rem;
-      border-radius: 6px;
+
+    input, select, textarea {
+      padding: 0.75rem;
+      border-radius: 8px;
       border: 1px solid #d1d5db;
-    }
-    .application button {
+      font-size: 1rem;
       width: 100%;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: #3b82f6;
+      box-shadow: 0 0 5px rgba(59,130,246,0.3);
+    }
+
+    button {
       padding: 0.75rem;
       background-color: #3b82f6;
       color: white;
       font-weight: bold;
+      font-size: 1rem;
       border: none;
-      border-radius: 6px;
+      border-radius: 8px;
       cursor: pointer;
+      transition: background 0.3s;
     }
-    .application button:hover {
+
+    button:hover {
       background-color: #1e40af;
+    }
+
+    .section-title {
+      margin-top: 1.5rem;
+      color: #1e3a8a;
+      font-size: 1.25rem;
+      font-weight: bold;
+      border-bottom: 2px solid #3b82f6;
+      padding-bottom: 0.25rem;
     }
   </style>
 </head>
@@ -60,10 +93,51 @@
     </ul>
   </nav>
 
-  <section class="application">
+  <!-- Loan Application Form -->
+  <div class="application-container">
     <h2>Loan Application Form</h2>
-    <form>
-      <label for="amount">Loan Amount ($)</label>
+    <form id="loanForm">
+
+      <!-- Personal Details -->
+      <div class="section-title">Personal Details</div>
+      <label for="fullName">Full Name</label>
+      <input type="text" id="fullName" required>
+
+      <label for="idNumber">National ID / Passport Number</label>
+      <input type="text" id="idNumber" required>
+
+      <label for="dob">Date of Birth</label>
+      <input type="date" id="dob" required>
+
+      <label for="phone">Phone Number</label>
+      <input type="tel" id="phone" placeholder="+254..." required>
+
+      <label for="email">Email Address</label>
+      <input type="email" id="email" placeholder="example@email.com" required>
+
+      <label for="residence">Place of Residence</label>
+      <input type="text" id="residence" placeholder="City / Town" required>
+
+      <!-- Employment / Business Details -->
+      <div class="section-title">Employment / Business</div>
+      <label for="employmentType">Employment Type</label>
+      <select id="employmentType" required>
+        <option value="">Select</option>
+        <option value="Salaried">Salaried</option>
+        <option value="Self-Employed">Self-Employed</option>
+        <option value="Business Owner">Business Owner</option>
+        <option value="Other">Other</option>
+      </select>
+
+      <label for="employer">Employer / Business Name</label>
+      <input type="text" id="employer" required>
+
+      <label for="monthlyIncome">Monthly Income (Ksh)</label>
+      <input type="number" id="monthlyIncome" required>
+
+      <!-- Loan Details -->
+      <div class="section-title">Loan Details</div>
+      <label for="amount">Loan Amount (Ksh)</label>
       <input type="number" id="amount" required>
 
       <label for="term">Repayment Term (Months)</label>
@@ -76,11 +150,12 @@
       </select>
 
       <label for="purpose">Loan Purpose</label>
-      <textarea id="purpose" rows="4" required></textarea>
+      <textarea id="purpose" rows="3" placeholder="E.g., school fees, business expansion, medical expenses" required></textarea>
 
-      <button type="submit">Apply Now</button>
+      <button type="submit">Submit Application</button>
     </form>
-  </section>
+  </div>
 
+  <script src="scripts/main.js"></script>
 </body>
 </html>

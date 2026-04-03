@@ -92,11 +92,11 @@ video { width:100%; border-radius:12px; border:1px solid #d1d5db; margin-top:0.5
         <option value="Sister">Sister</option>
       </select>
 
-      <label for="refereeContact">Choose Contact</label>
-      <select id="refereeContact" required>
-        <option value="">Select Contact from device</option>
-        <!-- Options can be populated dynamically -->
-      </select>
+      <label for="refereeName">Reference Full Name</label>
+      <input type="text" id="refereeName" required placeholder="John Doe">
+
+      <label for="refereePhone">Reference Phone Number</label>
+      <input type="tel" id="refereePhone" required placeholder="0xxxxxxxxx">
     </div>
 
     <!-- Step 4: Camera Verification -->
@@ -165,6 +165,14 @@ function validateForm(){
     const email = document.getElementById("email").value;
     if(!email.endsWith("@gmail.com")){ alert("Email must end with @gmail.com."); return false;}
   }
+
+  if(currentStep===2){
+    const refPhone = document.getElementById("refereePhone").value;
+    if(!/^0\d{9}$/.test(refPhone)){
+      alert("Reference phone must start with 0 and be 10 digits."); return false;
+    }
+  }
+
   return true;
 }
 
@@ -233,4 +241,4 @@ showStep(currentStep);
 </script>
 
 </body>
-</html>
+  </html>

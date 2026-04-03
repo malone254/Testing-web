@@ -1,109 +1,114 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Loan Application Form</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f3f4f6;
-      margin: 0;
-      padding: 0;
-      color: #111827;
-    }
-
-    .application-container {
-      max-width: 650px;
-      margin: 2rem auto;
-      padding: 2.5rem;
-      background-color: white;
-      border-radius: 12px;
-      box-shadow: 0 6px 12px rgba(0,0,0,0.1);
-    }
-
-    h2 {
-      text-align: center;
-      color: #007aff; /* Branch-style blue */
-      margin-bottom: 2rem;
-      font-size: 2rem;
-    }
-
-    form {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-    }
-
-    label {
-      font-weight: bold;
-      margin-bottom: 0.25rem;
-    }
-
-    input, select, textarea {
-      padding: 0.75rem;
-      border-radius: 8px;
-      border: 1px solid #d1d5db;
-      font-size: 1rem;
-      width: 100%;
-    }
-
-    input:focus, select:focus, textarea:focus {
-      outline: none;
-      border-color: #007aff;
-      box-shadow: 0 0 5px rgba(0,122,255,0.3);
-    }
-
-    button {
-      padding: 0.75rem;
-      background-color: #007aff;
-      color: white;
-      font-weight: bold;
-      font-size: 1rem;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: background 0.3s;
-    }
-
-    button:hover {
-      background-color: #005bbb;
-    }
-
-    .section-title {
-      margin-top: 1.5rem;
-      color: #007aff;
-      font-size: 1.25rem;
-      font-weight: bold;
-      border-bottom: 2px solid #007aff;
-      padding-bottom: 0.25rem;
-    }
-
-    .referee-group {
-      display: flex;
-      flex-direction: column;
-      gap: 0.75rem;
-      background-color: #f9fafb;
-      padding: 1rem;
-      border-radius: 8px;
-      border: 1px solid #e5e7eb;
-    }
-
-    .referee-group h4 {
-      margin: 0;
-      font-size: 1rem;
-      font-weight: bold;
-      color: #1e3a8a;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Branch-style Loan Application</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f3f4f6;
+    margin: 0;
+    padding: 0;
+    color: #111827;
+  }
+  .container {
+    max-width: 650px;
+    margin: 2rem auto;
+    padding: 2.5rem;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+  }
+  h2 {
+    text-align: center;
+    color: #007aff;
+    margin-bottom: 2rem;
+  }
+  form {
+    display: flex;
+    flex-direction: column;
+  }
+  .form-step {
+    display: none;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .form-step.active {
+    display: flex;
+  }
+  label {
+    font-weight: bold;
+  }
+  input, select, textarea {
+    padding: 0.75rem;
+    border-radius: 8px;
+    border: 1px solid #d1d5db;
+    font-size: 1rem;
+    width: 100%;
+  }
+  input[type="file"] {
+    padding: 0.25rem;
+  }
+  input:focus, select:focus, textarea:focus {
+    outline: none;
+    border-color: #007aff;
+    box-shadow: 0 0 5px rgba(0,122,255,0.3);
+  }
+  .buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1rem;
+  }
+  button {
+    padding: 0.75rem 1.5rem;
+    background-color: #007aff;
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  button:hover {
+    background-color: #005bbb;
+  }
+  .section-title {
+    color: #007aff;
+    font-size: 1.25rem;
+    font-weight: bold;
+    border-bottom: 2px solid #007aff;
+    padding-bottom: 0.25rem;
+    margin-top: 1rem;
+  }
+  .referee-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    background: #f9fafb;
+    padding: 1rem;
+    border-radius: 8px;
+    border: 1px solid #e5e7eb;
+  }
+  .referee-group h4 {
+    margin: 0;
+    font-size: 1rem;
+    color: #1e3a8a;
+  }
+  .file-preview {
+    font-size: 0.9rem;
+    color: #555;
+  }
+</style>
 </head>
 <body>
 
-  <div class="application-container">
-    <h2>Loan Application Form</h2>
-    <form id="loanForm">
+<div class="container">
+  <h2>Loan Application Form</h2>
+  <form id="loanForm" enctype="multipart/form-data">
 
-      <!-- Personal Details -->
+    <!-- Step 1: Personal Details -->
+    <div class="form-step active">
       <div class="section-title">Personal Details</div>
       <label for="fullName">Full Name</label>
       <input type="text" id="fullName" required>
@@ -118,12 +123,23 @@
       <input type="tel" id="phone" placeholder="+254..." required>
 
       <label for="email">Email Address</label>
-      <input type="email" id="email" placeholder="example@email.com" required>
+      <input type="email" id="email" required>
 
       <label for="residence">Place of Residence</label>
-      <input type="text" id="residence" placeholder="City / Town" required>
+      <input type="text" id="residence" required>
 
-      <!-- Employment / Business -->
+      <label for="maritalStatus">Marital Status</label>
+      <select id="maritalStatus" required>
+        <option value="">Select</option>
+        <option value="Single">Single</option>
+        <option value="Married">Married</option>
+        <option value="Divorced">Divorced</option>
+        <option value="Widowed">Widowed</option>
+      </select>
+    </div>
+
+    <!-- Step 2: Employment / Business -->
+    <div class="form-step">
       <div class="section-title">Employment / Business</div>
       <label for="employmentType">Employment Type</label>
       <select id="employmentType" required>
@@ -137,13 +153,24 @@
       <label for="employer">Employer / Business Name</label>
       <input type="text" id="employer" required>
 
-      <label for="monthlyIncome">Monthly Income (Ksh)</label>
-      <input type="number" id="monthlyIncome" required>
+      <label for="jobTitle">Job / Position Title</label>
+      <input type="text" id="jobTitle" required>
 
-      <!-- Loan Details -->
+      <label for="jobLocation">Job / Business Location</label>
+      <input type="text" id="jobLocation" required>
+
+      <label for="yearsEmployed">Years of Employment / Business Operation</label>
+      <input type="number" id="yearsEmployed" min="0" required>
+
+      <label for="monthlyIncome">Monthly Income (Ksh)</label>
+      <input type="number" id="monthlyIncome" min="1" required>
+    </div>
+
+    <!-- Step 3: Loan Details -->
+    <div class="form-step">
       <div class="section-title">Loan Details</div>
       <label for="amount">Loan Amount (Ksh)</label>
-      <input type="number" id="amount" required>
+      <input type="number" id="amount" min="1" required>
 
       <label for="term">Repayment Term (Months)</label>
       <select id="term" required>
@@ -155,28 +182,115 @@
       </select>
 
       <label for="purpose">Loan Purpose</label>
-      <textarea id="purpose" rows="3" placeholder="E.g., school fees, business expansion, medical expenses" required></textarea>
+      <textarea id="purpose" rows="3" required></textarea>
 
-      <!-- Referees -->
+      <div id="loanPreview" class="file-preview"></div>
+    </div>
+
+    <!-- Step 4: Referees -->
+    <div class="form-step">
       <div class="section-title">Referees / Emergency Contacts</div>
+
       <div class="referee-group">
         <h4>Referee 1</h4>
         <input type="text" id="referee1Name" placeholder="Full Name" required>
         <input type="tel" id="referee1Phone" placeholder="Phone Number" required>
-        <input type="text" id="referee1Relation" placeholder="Relation to you" required>
+        <input type="text" id="referee1Relation" placeholder="Relation" required>
+        <input type="text" id="referee1Occupation" placeholder="Occupation" required>
+        <input type="text" id="referee1Location" placeholder="Location" required>
       </div>
 
       <div class="referee-group">
         <h4>Referee 2</h4>
         <input type="text" id="referee2Name" placeholder="Full Name" required>
         <input type="tel" id="referee2Phone" placeholder="Phone Number" required>
-        <input type="text" id="referee2Relation" placeholder="Relation to you" required>
+        <input type="text" id="referee2Relation" placeholder="Relation" required>
+        <input type="text" id="referee2Occupation" placeholder="Occupation" required>
+        <input type="text" id="referee2Location" placeholder="Location" required>
       </div>
+    </div>
 
-      <button type="submit">Submit Application</button>
-    </form>
-  </div>
+    <!-- Step 5: Verification -->
+    <div class="form-step">
+      <div class="section-title">Verification</div>
+      <label for="idUpload">Upload National ID / Passport (Front & Back)</label>
+      <input type="file" id="idUpload" accept="image/*,application/pdf" required>
+      <label for="selfieUpload">Upload Selfie / Face Photo</label>
+      <input type="file" id="selfieUpload" accept="image/*" required>
+      <label for="mpesaUpload">Upload MPESA Last 6 Months Statement</label>
+      <input type="file" id="mpesaUpload" accept="image/*,application/pdf" required>
+    </div>
 
-  <script src="scripts/main.js"></script>
+    <!-- Navigation Buttons -->
+    <div class="buttons">
+      <button type="button" id="prevBtn">Previous</button>
+      <button type="button" id="nextBtn">Next</button>
+    </div>
+  </form>
+</div>
+
+<script>
+// Multi-step form logic
+let currentStep = 0;
+const steps = document.querySelectorAll(".form-step");
+const prevBtn = document.getElementById("prevBtn");
+const nextBtn = document.getElementById("nextBtn");
+const loanAmount = document.getElementById("amount");
+const loanTerm = document.getElementById("term");
+const loanPreview = document.getElementById("loanPreview");
+
+function showStep(n) {
+  steps.forEach((step, i) => step.classList.toggle("active", i === n));
+  prevBtn.style.display = n === 0 ? "none" : "inline-block";
+  nextBtn.textContent = n === steps.length - 1 ? "Submit" : "Next";
+
+  if (n === 2) updateLoanPreview();
+}
+
+function nextPrev(n) {
+  if (n === 1 && !validateForm()) return;
+  if (n === 1 && currentStep === steps.length - 1) {
+    alert("Loan application submitted successfully!");
+    document.getElementById("loanForm").reset();
+    currentStep = 0;
+    showStep(currentStep);
+    return;
+  }
+  currentStep += n;
+  showStep(currentStep);
+}
+
+function validateForm() {
+  const inputs = steps[currentStep].querySelectorAll("input, select, textarea");
+  for (let input of inputs) {
+    if (!input.checkValidity()) {
+      input.reportValidity();
+      return false;
+    }
+  }
+  return true;
+}
+
+function updateLoanPreview() {
+  const amount = parseFloat(loanAmount.value) || 0;
+  const term = parseInt(loanTerm.value) || 0;
+  const interestRate = 10; // 10% flat for demo
+  if (amount && term) {
+    const interest = (amount * interestRate) / 100;
+    const total = amount + interest;
+    const monthly = (total / term).toFixed(2);
+    loanPreview.textContent = `Repayment Preview: Total Ksh ${total}, Monthly Ksh ${monthly} at ${interestRate}% interest.`;
+  } else {
+    loanPreview.textContent = "";
+  }
+}
+
+prevBtn.addEventListener("click", () => nextPrev(-1));
+nextBtn.addEventListener("click", () => nextPrev(1));
+loanAmount.addEventListener("input", updateLoanPreview);
+loanTerm.addEventListener("change", updateLoanPreview);
+
+showStep(currentStep);
+</script>
 </body>
-</html>
+          </html>

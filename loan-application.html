@@ -5,108 +5,232 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Loan Application</title>
 <style>
-  body { font-family: Arial, sans-serif; background:#f3f4f6; margin:0; color:#111827; }
-  .container { max-width: 650px; margin:2rem auto; padding:2.5rem; background:white; border-radius:12px; box-shadow:0 6px 12px rgba(0,0,0,0.1);}
-  h2 { text-align:center; color:#007aff; margin-bottom:2rem; }
-  label { font-weight:bold; display:block; margin-top:1rem; }
-  input, select { padding:0.75rem; border-radius:8px; border:1px solid #d1d5db; font-size:1rem; width:100%; margin-top:0.25rem; }
-  input:focus, select:focus { outline:none; border-color:#007aff; box-shadow:0 0 5px rgba(0,122,255,0.3);}
-  button { padding:0.75rem 1.5rem; background:#007aff; color:white; font-weight:bold; border:none; border-radius:8px; cursor:pointer; margin-top:1.5rem; width:100%; }
+body { font-family: Arial, sans-serif; margin:0; background:#f3f4f6; color:#111827;}
+.container { max-width:650px; margin:2rem auto; padding:2rem; background:white; border-radius:12px; box-shadow:0 6px 12px rgba(0,0,0,0.1);}
+h2 { text-align:center; color:#007aff; margin-bottom:1.5rem;}
+label { font-weight:bold; display:block; margin-top:1rem;}
+input, select { padding:0.75rem; border-radius:8px; border:1px solid #d1d5db; font-size:1rem; width:100%; margin-top:0.25rem;}
+input:focus, select:focus { outline:none; border-color:#007aff; box-shadow:0 0 5px rgba(0,122,255,0.3);}
+button { padding:0.75rem 1.5rem; background:#007aff; color:white; font-weight:bold; border:none; border-radius:8px; cursor:pointer; margin-top:1.5rem; width:100%; }
+.progress-bar { display:flex; margin-bottom:1rem; }
+.progress-step { flex:1; height:6px; margin-right:4px; background:#d1d5db; border-radius:3px; }
+.progress-step.active { background:#007aff; }
+.form-step { display:none; flex-direction:column; }
+.form-step.active { display:flex; }
+#loanPreview { margin-top:0.5rem; font-size:0.95rem; color:#555; }
+video { width:100%; border-radius:12px; border:1px solid #d1d5db; margin-top:0.5rem; }
+.capture-preview { width:200px; margin-top:10px; border-radius:8px; }
+.buttons { display:flex; justify-content:space-between; margin-top:1.5rem; }
 </style>
 </head>
 <body>
+
 <div class="container">
   <h2>Loan Application Form</h2>
+
+  <div class="progress-bar">
+    <div class="progress-step active"></div>
+    <div class="progress-step"></div>
+    <div class="progress-step"></div>
+    <div class="progress-step"></div>
+    <div class="progress-step"></div>
+  </div>
+
   <form id="loanForm">
-    
-    <!-- Personal Details -->
-    <label for="fullName">Full Name</label>
-    <input type="text" id="fullName" required placeholder="John Doe">
-    
-    <label for="dob">Date of Birth</label>
-    <input type="date" id="dob" required>
-    
-    <label for="phone">Phone Number</label>
-    <input type="tel" id="phone" required placeholder="0xxxxxxxxx">
-    
-    <label for="idNumber">ID Number</label>
-    <input type="text" id="idNumber" required placeholder="8 digits">
-    
-    <label for="email">Email Address</label>
-    <input type="email" id="email" required placeholder="example@gmail.com">
-    
-    <label for="residence">Place of Residence</label>
-    <input type="text" id="residence" readonly placeholder="Auto-detected">
 
-    <!-- Employment / Income -->
-    <label for="monthlyIncome">Monthly Income</label>
-    <select id="monthlyIncome" required>
-      <option value="">Select Income</option>
-      <option value="below10k">Below 10k</option>
-      <option value="10k-50k">10k – 50k</option>
-      <option value="50k-100k">50k – 100k</option>
-      <option value="above100k">Above 100k</option>
-    </select>
+    <!-- Step 1: Personal Details -->
+    <div class="form-step active">
+      <label for="fullName">Full Name</label>
+      <input type="text" id="fullName" required placeholder="John Doe">
 
-    <!-- Loan Details -->
-    <label for="loanPurpose">Loan Purpose</label>
-    <select id="loanPurpose" required>
-      <option value="">Select Purpose</option>
-      <option value="Business">Business</option>
-      <option value="Education">Education</option>
-      <option value="Medical">Medical</option>
-      <option value="Emergency">Emergency</option>
-      <option value="Other">Other</option>
-    </select>
+      <label for="dob">Date of Birth</label>
+      <input type="date" id="dob" required>
 
-    <!-- Referees -->
-    <label for="refereeType">Reference Type</label>
-    <select id="refereeType" required>
-      <option value="">Select Reference</option>
-      <option value="Parent">Parent</option>
-      <option value="Spouse">Spouse</option>
-      <option value="Brother">Brother</option>
-      <option value="Sister">Sister</option>
-    </select>
+      <label for="phone">Phone Number</label>
+      <input type="tel" id="phone" required placeholder="0xxxxxxxxx">
 
-    <label for="refereeContact">Choose Contact</label>
-    <select id="refereeContact" required>
-      <option value="">Select Contact from device</option>
-      <!-- Options to be populated dynamically if device API is used -->
-    </select>
+      <label for="idNumber">ID Number</label>
+      <input type="text" id="idNumber" required placeholder="8 digits">
 
-    <button type="submit">Submit Application</button>
+      <label for="email">Email Address</label>
+      <input type="email" id="email" required placeholder="example@gmail.com">
+
+      <label for="residence">Place of Residence</label>
+      <input type="text" id="residence" readonly placeholder="Auto-detected">
+    </div>
+
+    <!-- Step 2: Employment / Income -->
+    <div class="form-step">
+      <label for="monthlyIncome">Monthly Income</label>
+      <select id="monthlyIncome" required>
+        <option value="">Select Income</option>
+        <option value="below10k">Below 10k</option>
+        <option value="10k-50k">10k – 50k</option>
+        <option value="50k-100k">50k – 100k</option>
+        <option value="above100k">Above 100k</option>
+      </select>
+
+      <label for="loanPurpose">Loan Purpose</label>
+      <select id="loanPurpose" required>
+        <option value="">Select Purpose</option>
+        <option value="Business">Business</option>
+        <option value="Education">Education</option>
+        <option value="Medical">Medical</option>
+        <option value="Emergency">Emergency</option>
+        <option value="Other">Other</option>
+      </select>
+    </div>
+
+    <!-- Step 3: Referees -->
+    <div class="form-step">
+      <label for="refereeType">Reference Type</label>
+      <select id="refereeType" required>
+        <option value="">Select Reference</option>
+        <option value="Parent">Parent</option>
+        <option value="Spouse">Spouse</option>
+        <option value="Brother">Brother</option>
+        <option value="Sister">Sister</option>
+      </select>
+
+      <label for="refereeContact">Choose Contact</label>
+      <select id="refereeContact" required>
+        <option value="">Select Contact from device</option>
+        <!-- Options can be populated dynamically -->
+      </select>
+    </div>
+
+    <!-- Step 4: Camera Verification -->
+    <div class="form-step">
+      <p id="cameraInstruction">Take a photo of your ID (Front)</p>
+      <video id="camera" autoplay playsinline></video>
+      <button type="button" id="captureBtn">Take Photo</button>
+      <img id="preview" class="capture-preview" style="display:none;">
+      <button type="button" id="retakeBtn" style="display:none;">Retake</button>
+    </div>
+
+    <!-- Step 5: Loan Preview & Submit -->
+    <div class="form-step">
+      <p id="loanPreview">Loan repayment preview will appear here.</p>
+    </div>
+
+    <div class="buttons">
+      <button type="button" id="prevBtn">Previous</button>
+      <button type="button" id="nextBtn">Next</button>
+    </div>
+
   </form>
 </div>
 
 <script>
-  // Geolocation for Residence
-  const residenceInput = document.getElementById("residence");
-  if(navigator.geolocation){
-    navigator.geolocation.getCurrentPosition(pos=>{
-      const {latitude, longitude} = pos.coords;
-      residenceInput.value = `Lat: ${latitude.toFixed(3)}, Lon: ${longitude.toFixed(3)}`;
-    },err=>{residenceInput.placeholder="Unable to detect location"});
+// Multi-step logic
+let currentStep = 0;
+const steps = document.querySelectorAll(".form-step");
+const progressSteps = document.querySelectorAll(".progress-step");
+const prevBtn = document.getElementById("prevBtn");
+const nextBtn = document.getElementById("nextBtn");
+
+function showStep(n){
+  steps.forEach((step,i)=>step.classList.toggle("active",i===n));
+  prevBtn.style.display = n===0?"none":"inline-block";
+  nextBtn.textContent = n===steps.length-1?"Submit":"Next";
+  progressSteps.forEach((bar,i)=>bar.classList.toggle("active", i<=n));
+  if(n===4) updateLoanPreview();
+  if(n===3) startCameraCapture();
+}
+function nextPrev(n){
+  if(n===1 && !validateForm()) return;
+  if(n===1 && currentStep===steps.length-1){
+    alert("Loan application submitted successfully!");
+    document.getElementById("loanForm").reset();
+    currentStep=0; showStep(currentStep); return;
+  }
+  currentStep+=n; showStep(currentStep);
+}
+
+// Validations
+function validateForm(){
+  const inputs = steps[currentStep].querySelectorAll("input, select");
+  for(let input of inputs){
+    if(!input.checkValidity()){ input.reportValidity(); return false;}
   }
 
-  // Form Validation
-  document.getElementById("loanForm").addEventListener("submit", function(e){
-    e.preventDefault();
+  if(currentStep===0){
     const dob = new Date(document.getElementById("dob").value);
-    const age = new Date().getFullYear() - dob.getFullYear();
-    if(age < 18){ alert("You must be 18 years or older."); return; }
-
+    const age = new Date().getFullYear()-dob.getFullYear();
+    if(age<18){ alert("You must be 18 years or older."); return false;}
     const phone = document.getElementById("phone").value;
-    if(!/^0\d{9}$/.test(phone)){ alert("Phone must start with 0 and be 10 digits."); return; }
-
+    if(!/^0\d{9}$/.test(phone)){ alert("Phone must start with 0 and be 10 digits."); return false;}
     const id = document.getElementById("idNumber").value;
-    if(!/^\d{8}$/.test(id)){ alert("ID must be exactly 8 digits."); return; }
-
+    if(!/^\d{8}$/.test(id)){ alert("ID must be 8 digits."); return false;}
     const email = document.getElementById("email").value;
-    if(!email.endsWith("@gmail.com")){ alert("Email must end with @gmail.com."); return; }
+    if(!email.endsWith("@gmail.com")){ alert("Email must end with @gmail.com."); return false;}
+  }
+  return true;
+}
 
-    alert("Application submitted successfully!");
-  });
+// Loan preview
+const loanAmountInput = document.getElementById("monthlyIncome");
+const loanPurposeInput = document.getElementById("loanPurpose");
+const loanPreview = document.getElementById("loanPreview");
+
+function updateLoanPreview(){
+  const incomeText = loanAmountInput.options[loanAmountInput.selectedIndex].text;
+  const purpose = loanPurposeInput.options[loanPurposeInput.selectedIndex].text;
+  if(incomeText && purpose){
+    loanPreview.textContent = `Loan for ${purpose} with monthly income: ${incomeText}`;
+  }
+}
+
+// Camera capture
+const video = document.getElementById("camera");
+const captureBtn = document.getElementById("captureBtn");
+const preview = document.getElementById("preview");
+const retakeBtn = document.getElementById("retakeBtn");
+const cameraInstruction = document.getElementById("cameraInstruction");
+let captureIndex = 0;
+const cameraSteps=["ID Front","ID Back","Selfie"];
+let capturedImages=[null,null,null];
+
+function startCameraCapture(){
+  navigator.mediaDevices.getUserMedia({ video: { facingMode: captureIndex===2?"user":"environment" } })
+  .then(stream=>video.srcObject=stream)
+  .catch(err=>alert("Camera access required"));
+  updateInstruction();
+}
+function updateInstruction(){
+  cameraInstruction.textContent = `Take a photo of your ${cameraSteps[captureIndex]}`;
+  preview.style.display="none"; video.style.display="block"; captureBtn.style.display="inline-block"; retakeBtn.style.display="none";
+}
+function isBlurry(canvas){
+  const ctx=canvas.getContext("2d");
+  const imgData=ctx.getImageData(0,0,canvas.width,canvas.height);
+  let sum=0; for(let i=0;i<imgData.data.length;i+=4){ sum+=(imgData.data[i]+imgData.data[i+1]+imgData.data[i+2])/3;}
+  const variance=sum/imgData.data.length;
+  return variance<50;
+}
+captureBtn.addEventListener("click",()=>{
+  const canvas=document.createElement("canvas"); canvas.width=video.videoWidth; canvas.height=video.videoHeight;
+  canvas.getContext("2d").drawImage(video,0,0);
+  if(isBlurry(canvas)){ alert("Photo is blurry. Please retake."); return;}
+  capturedImages[captureIndex]=canvas.toDataURL("image/png");
+  preview.src=capturedImages[captureIndex]; preview.style.display="block"; video.style.display="none"; captureBtn.style.display="none"; retakeBtn.style.display="inline-block";
+});
+retakeBtn.addEventListener("click",()=>updateInstruction());
+
+// Geolocation
+const residenceInput = document.getElementById("residence");
+if(navigator.geolocation){
+  navigator.geolocation.getCurrentPosition(pos=>{
+    residenceInput.value = `Lat: ${pos.coords.latitude.toFixed(3)}, Lon: ${pos.coords.longitude.toFixed(3)}`;
+  },err=>{residenceInput.placeholder="Unable to detect location"});
+}
+
+// Button events
+nextBtn.addEventListener("click",()=>nextPrev(1));
+prevBtn.addEventListener("click",()=>nextPrev(-1));
+
+showStep(currentStep);
 </script>
+
 </body>
 </html>

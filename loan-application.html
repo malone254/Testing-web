@@ -3,8 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Loan Application - LendEasy</title>
-  <link rel="stylesheet" href="styles/style.css">
+  <title>Loan Application Form</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -15,22 +14,22 @@
     }
 
     .application-container {
-      max-width: 600px;
-      margin: 3rem auto;
-      padding: 2rem;
+      max-width: 650px;
+      margin: 2rem auto;
+      padding: 2.5rem;
       background-color: white;
       border-radius: 12px;
       box-shadow: 0 6px 12px rgba(0,0,0,0.1);
     }
 
-    .application-container h2 {
+    h2 {
       text-align: center;
-      color: #1e3a8a;
+      color: #007aff; /* Branch-style blue */
       margin-bottom: 2rem;
       font-size: 2rem;
     }
 
-    .application-container form {
+    form {
       display: flex;
       flex-direction: column;
       gap: 1rem;
@@ -51,13 +50,13 @@
 
     input:focus, select:focus, textarea:focus {
       outline: none;
-      border-color: #3b82f6;
-      box-shadow: 0 0 5px rgba(59,130,246,0.3);
+      border-color: #007aff;
+      box-shadow: 0 0 5px rgba(0,122,255,0.3);
     }
 
     button {
       padding: 0.75rem;
-      background-color: #3b82f6;
+      background-color: #007aff;
       color: white;
       font-weight: bold;
       font-size: 1rem;
@@ -68,32 +67,38 @@
     }
 
     button:hover {
-      background-color: #1e40af;
+      background-color: #005bbb;
     }
 
     .section-title {
       margin-top: 1.5rem;
-      color: #1e3a8a;
+      color: #007aff;
       font-size: 1.25rem;
       font-weight: bold;
-      border-bottom: 2px solid #3b82f6;
+      border-bottom: 2px solid #007aff;
       padding-bottom: 0.25rem;
+    }
+
+    .referee-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      background-color: #f9fafb;
+      padding: 1rem;
+      border-radius: 8px;
+      border: 1px solid #e5e7eb;
+    }
+
+    .referee-group h4 {
+      margin: 0;
+      font-size: 1rem;
+      font-weight: bold;
+      color: #1e3a8a;
     }
   </style>
 </head>
 <body>
 
-  <!-- Navbar -->
-  <nav class="navbar">
-    <div class="logo">LendEasy</div>
-    <ul class="nav-links">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="borrower.html">Borrower</a></li>
-      <li><a href="lender.html">Lender</a></li>
-    </ul>
-  </nav>
-
-  <!-- Loan Application Form -->
   <div class="application-container">
     <h2>Loan Application Form</h2>
     <form id="loanForm">
@@ -118,7 +123,7 @@
       <label for="residence">Place of Residence</label>
       <input type="text" id="residence" placeholder="City / Town" required>
 
-      <!-- Employment / Business Details -->
+      <!-- Employment / Business -->
       <div class="section-title">Employment / Business</div>
       <label for="employmentType">Employment Type</label>
       <select id="employmentType" required>
@@ -151,6 +156,22 @@
 
       <label for="purpose">Loan Purpose</label>
       <textarea id="purpose" rows="3" placeholder="E.g., school fees, business expansion, medical expenses" required></textarea>
+
+      <!-- Referees -->
+      <div class="section-title">Referees / Emergency Contacts</div>
+      <div class="referee-group">
+        <h4>Referee 1</h4>
+        <input type="text" id="referee1Name" placeholder="Full Name" required>
+        <input type="tel" id="referee1Phone" placeholder="Phone Number" required>
+        <input type="text" id="referee1Relation" placeholder="Relation to you" required>
+      </div>
+
+      <div class="referee-group">
+        <h4>Referee 2</h4>
+        <input type="text" id="referee2Name" placeholder="Full Name" required>
+        <input type="tel" id="referee2Phone" placeholder="Phone Number" required>
+        <input type="text" id="referee2Relation" placeholder="Relation to you" required>
+      </div>
 
       <button type="submit">Submit Application</button>
     </form>

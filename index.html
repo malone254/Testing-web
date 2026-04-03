@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Malone's Phone Store</title>
+<style>
+/* Reset */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body, html { height: 100%; font-family: Arial, sans-serif; overflow: hidden; color: white; }
+
+/* Background */
+.background {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at center, #0a0a23, #000);
+  z-index: -2;
+}
+
+/* Orbit container */
+.orbit {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  transform: translate(-50%, -50%);
+}
+
+/* Planets orbiting the center */
+.planet {
+  position: absolute;
+  border-radius: 50%;
+  transform-origin: -150px 0; /* orbit radius */
+}
+
+.planet1 { width: 50px; height: 50px; background: linear-gradient(45deg,#00c6ff,#0072ff); animation: rotateOrbit 10s linear infinite; }
+.planet2 { width: 70px; height: 70px; background: linear-gradient(45deg,#ff6a00,#ff0000); animation: rotateOrbit 15s linear infinite; transform-origin: -200px 0; }
+.planet3 { width: 40px; height: 40px; background: linear-gradient(45deg,#00ff87,#60efff); animation: rotateOrbit 20s linear infinite; transform-origin: -120px 0; }
+
+@keyframes rotateOrbit {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Central content */
+.content {
+  position: relative;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+  z-index: 1;
+}
+
+img.logo {
+  width: 200px;
+  max-width: 80%;
+  margin-bottom: 20px;
+}
+
+h1 {
+  font-size: 2.2em;
+  letter-spacing: 1px;
+  margin-bottom: 10px;
+}
+
+p.description {
+  max-width: 600px;
+  color: #ccc;
+  font-size: 1.1em;
+  line-height: 1.5;
+}
+
+/* Scroll indicator */
+.scroll-indicator {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 18px;
+  animation: fadeBlink 3s infinite;
+}
+
+@keyframes fadeBlink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* Fade-out for page transition */
+body.fade-out { opacity: 0; transition: opacity 0.6s ease; }
+
+</style>
+</head>
+<body>
+
+<div class="background"></div>
+
+<div class="orbit">
+  <div class="planet planet1"></div>
+  <div class="planet planet2"></div>
+  <div class="planet planet3"></div>
+</div>
+
+<div class="content">
+  <img src="lg.png" class="logo" alt="Malone's Phone Store Logo">
+  <h1>Malone's Phone Store</h1>
+  <p class="description">Latest smartphones. Best prices. Trusted quality.</p>
+</div>
+
+<div class="scroll-indicator">⬇ Scroll Down ⬇</div>
+
+<script>
+// redirect on scroll/swipe
+let redirected = false;
+function goToProducts() {
+  if (!redirected) {
+    redirected = true;
+    document.body.classList.add('fade-out');
+    setTimeout(() => { window.location.href = 'product.html'; }, 600);
+  }
+}
+
+// desktop scroll
+let scrollAmount = 0;
+window.addEventListener('wheel', e => {
+  if (e.deltaY > 0) {
+    scrollAmount += e.deltaY;
+    if (scrollAmount > 100) goToProducts();
+  }
+});
+
+// mobile swipe
+let startY = 0;
+window.addEventListener('touchstart', e => { startY = e.touches[0].clientY; });
+window.addEventListener('touchend', e => {
+  if (startY - e.changedTouches[0].clientY > 50) goToProducts();
+});
+</script>
+
+</body>
+</html>

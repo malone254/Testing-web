@@ -17,7 +17,7 @@ button { padding:0.75rem 1.5rem; background:#007aff; color:white; font-weight:bo
 .progress-step.active { background:#007aff; }
 .form-step { display:none; flex-direction:column; }
 .form-step.active { display:flex; }
-#loanPreview { margin-top:0.5rem; font-size:0.95rem; color:#555; }
+#loanPreview { margin-top:0.5rem; font-size:0.95rem; color:#555; white-space: pre-line;}
 video { width:100%; border-radius:12px; border:1px solid #d1d5db; margin-top:0.5rem; }
 .capture-preview { width:200px; margin-top:10px; border-radius:8px; }
 .buttons { display:flex; justify-content:space-between; margin-top:1.5rem; }
@@ -176,20 +176,33 @@ function validateForm(){
   return true;
 }
 
-// Loan preview
+// Loan preview calculation
 const loanAmountInput = document.getElementById("monthlyIncome");
 const loanPurposeInput = document.getElementById("loanPurpose");
 const loanPreview = document.getElementById("loanPreview");
 
 function updateLoanPreview(){
-  const incomeText = loanAmountInput.options[loanAmountInput.selectedIndex].text;
+  const incomeVal = loanAmountInput.value;
   const purpose = loanPurposeInput.options[loanPurposeInput.selectedIndex].text;
-  if(incomeText && purpose){
-    loanPreview.textContent = `Loan for ${purpose} with monthly income: ${incomeText}`;
-  }
+  let baseLoan = 0;
+  if(incomeVal === "below10k") baseLoan = 5000;
+  else if(incomeVal === "10k-50k") baseLoan = 20000;
+  else if(incomeVal === "50k-100k") baseLoan = 50000;
+  else if(incomeVal === "above100k") baseLoan = 100000;
+
+  const interestRate = 0.05; // 5% simple interest
+  const totalRepayment = baseLoan + (baseLoan * interestRate);
+  const monthlyInstallment = (totalRepayment / 6).toFixed(2); // 6 months
+
+  loanPreview.textContent = 
+`Loan Purpose: ${purpose}
+Loan Amount: KES ${baseLoan}
+Interest (5%): KES ${baseLoan * interestRate}
+Total Repayment: KES ${totalRepayment}
+Monthly Installment (6 months): KES ${monthlyInstallment}`;
 }
 
-// Camera capture
+// Camera capture (blurry check removed)
 const video = document.getElementById("camera");
 const captureBtn = document.getElementById("captureBtn");
 const preview = document.getElementById("preview");
@@ -209,19 +222,16 @@ function updateInstruction(){
   cameraInstruction.textContent = `Take a photo of your ${cameraSteps[captureIndex]}`;
   preview.style.display="none"; video.style.display="block"; captureBtn.style.display="inline-block"; retakeBtn.style.display="none";
 }
-function isBlurry(canvas){
-  const ctx=canvas.getContext("2d");
-  const imgData=ctx.getImageData(0,0,canvas.width,canvas.height);
-  let sum=0; for(let i=0;i<imgData.data.length;i+=4){ sum+=(imgData.data[i]+imgData.data[i+1]+imgData.data[i+2])/3;}
-  const variance=sum/imgData.data.length;
-  return variance<50;
-}
 captureBtn.addEventListener("click",()=>{
-  const canvas=document.createElement("canvas"); canvas.width=video.videoWidth; canvas.height=video.videoHeight;
+  const canvas=document.createElement("canvas"); 
+  canvas.width=video.videoWidth; canvas.height=video.videoHeight;
   canvas.getContext("2d").drawImage(video,0,0);
-  if(isBlurry(canvas)){ alert("Photo is blurry. Please retake."); return;}
   capturedImages[captureIndex]=canvas.toDataURL("image/png");
-  preview.src=capturedImages[captureIndex]; preview.style.display="block"; video.style.display="none"; captureBtn.style.display="none"; retakeBtn.style.display="inline-block";
+  preview.src=capturedImages[captureIndex]; 
+  preview.style.display="block"; 
+  video.style.display="none"; 
+  captureBtn.style.display="none"; 
+  retakeBtn.style.display="inline-block";
 });
 retakeBtn.addEventListener("click",()=>updateInstruction());
 
@@ -241,4 +251,4 @@ showStep(currentStep);
 </script>
 
 </body>
-  </html>
+</html>
